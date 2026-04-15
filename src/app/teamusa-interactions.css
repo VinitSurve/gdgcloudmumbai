@@ -1,0 +1,72 @@
+.teamusa-clone--interactive .hero__video,
+.teamusa-clone--interactive .hero__inner__text,
+.teamusa-clone--interactive .hero__inner__button,
+.teamusa-clone--interactive .hero__logo {
+  opacity: 1;
+}
+
+.teamusa-clone--interactive .hero__video,
+.teamusa-clone--interactive .hero__inner__text,
+.teamusa-clone--interactive .hero__inner__button,
+.teamusa-clone--interactive .hero__logo {
+  transition: opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.teamusa-clone--interactive .section-blackbox .blackbox-item,
+.teamusa-clone--interactive .section-visualizing .visualizing-item,
+.teamusa-clone--interactive .section-beyond .beyond-item {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.teamusa-clone--interactive .section-blackbox__video,
+.teamusa-clone--interactive .section-visualizing .visualizing-video {
+  transition: opacity 0.4s ease;
+}
+
+.teamusa-clone--interactive .section-tool__step {
+  transition: opacity 0.2s cubic-bezier(0.4, 1, 0.7, 1);
+}
+
+.teamusa-clone--interactive .section-tool__media {
+  transition: transform 0.4s cubic-bezier(0.22, 0.31, 0, 1),
+    opacity 0.3s cubic-bezier(0.4, 1, 0.7, 1);
+}
+
+.teamusa-clone--interactive .section-tool__video-fixed {
+  transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1),
+    border-radius 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.teamusa-clone--interactive .section-tool__video-fixed .section-tool__video {
+  transition: opacity 0.3s cubic-bezier(0.4, 1, 0.7, 1);
+}
+
+.teamusa-clone--interactive .section-build__track,
+.teamusa-clone--interactive .section-build .card-built {
+  transition: transform 0.6s cubic-bezier(0.4, 1, 0.7, 1);
+}
+
+.teamusa-clone--interactive .section-edge__slider__viewport {
+  touch-action: pan-x;
+}
+
+.teamusa-modal-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .teamusa-clone--interactive .section-blackbox .blackbox-item,
+  .teamusa-clone--interactive .section-visualizing .visualizing-item,
+  .teamusa-clone--interactive .section-beyond .beyond-item,
+  .teamusa-clone--interactive .section-tool__media,
+  .teamusa-clone--interactive .section-tool__video-fixed .section-tool__video,
+  .teamusa-clone--interactive .section-build .card-built,
+  .teamusa-clone--interactive .section-build__track {
+    transition: none !important;
+  }
+}
