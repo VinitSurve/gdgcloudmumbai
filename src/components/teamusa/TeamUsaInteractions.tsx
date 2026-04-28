@@ -63,20 +63,27 @@ const ATHLETE_CARD_MEDIA = [
 ] as const;
 
 const SECTION_DEFS: SectionDef[] = [
-  { id: "hero", label: "Hero", selector: '[data-section="hero"]', theme: "light" },
+  { 
+    id: "About", 
+    label: "About", 
+    selector: '[data-section="hero"]', 
+    theme: "light" 
+  },
   {
-    id: "challenge",
-    label: "Challenge",
+    id: "What We Do",
+    label: "What We Do",
     selector: '[data-section="Challenge"]',
     theme: "dark",
   },
   {
-    id: "athletes",
-    label: "Athletes",
+    id: "Organizers",
+    label: "Organizers",
     selector: '[data-section="Athletes"]',
     theme: "light",
   },
-  { id: "tool", label: "Tool", selector: '[data-section="Tool"]', theme: "light" },
+  { 
+    id: "tool", 
+    label: "Tool", selector: '[data-section="Tool"]', theme: "light" },
   { id: "build", label: "Build", selector: '[data-section="Tech"]', theme: "dark" },
   {
     id: "visualizing",
