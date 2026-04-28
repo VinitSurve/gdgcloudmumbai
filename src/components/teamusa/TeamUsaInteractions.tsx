@@ -76,18 +76,32 @@ const SECTION_DEFS: SectionDef[] = [
     theme: "dark",
   },
   {
+    id: "Events",
+    label: "Events",
+    selector: '[data-section="Events"]',
+    theme: "light",
+  },
+  {
     id: "Organizers",
     label: "Organizers",
     selector: '[data-section="Athletes"]',
     theme: "light",
   },
   { 
-    id: "tool", 
-    label: "Tool", selector: '[data-section="Tool"]', theme: "light" },
-  { id: "build", label: "Build", selector: '[data-section="Tech"]', theme: "dark" },
+    id: "Community", 
+    label: "Community", 
+    selector: '[data-section="Tool"]', 
+    theme: "light" 
+  },
+  { 
+    id: "Team", 
+    label: "Team", 
+    selector: '[data-section="Tech"]', 
+    theme: "dark" 
+  },
   {
-    id: "visualizing",
-    label: "Visualizing",
+    id: "Insights",
+    label: "Insights",
     selector: '[data-section="Visualiazing"]',
     theme: "light",
   },
@@ -1099,14 +1113,14 @@ export default function TeamUsaInteractions() {
                 {section.label}
               </button>
             ))}
-            <a
+            {/* <a
               href="https://cloud.google.com/vertex-ai"
               target="_blank"
               rel="noopener noreferrer"
               className="nav__list__link"
             >
               <span className="button-style">Start building</span>
-            </a>
+            </a> */}
             <div
               className="nav__follower"
               style={{
