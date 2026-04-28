@@ -56,6 +56,12 @@ type AthleteTransform = {
   zIndex: number;
 };
 
+const ATHLETE_CARD_MEDIA = [
+  { src: "/assets/meet-the-athletes/abhishek_sharma_RQClIHO.webp", alt: "Abhishek Sharma" },
+  { src: "/assets/meet-the-athletes/rushabh%20mahale.webp", alt: "Rushabh Mahale" },
+  { src: "/assets/meet-the-athletes/Niharika%20Dhanik.webp", alt: "Niharika Dhanik" },
+] as const;
+
 const SECTION_DEFS: SectionDef[] = [
   { id: "hero", label: "Hero", selector: '[data-section="hero"]', theme: "light" },
   {
@@ -274,6 +280,37 @@ function getSourceFromContainer(container: HTMLElement): string | null {
   return videoSrc || null;
 }
 
+function swapAthleteCardMedia(cards: HTMLElement[]): void {
+  cards.forEach((card, index) => {
+    const existingVideo = card.querySelector<HTMLVideoElement>("video");
+    if (!existingVideo) {
+      return;
+    }
+
+    const media = ATHLETE_CARD_MEDIA[Math.min(index, ATHLETE_CARD_MEDIA.length - 1)];
+    const image = document.createElement("img");
+    image.src = media.src;
+    image.alt = media.alt;
+    image.loading = "lazy";
+    image.decoding = "async";
+    image.style.position = "absolute";
+    image.style.top = "0";
+    image.style.left = "0";
+    image.style.right = "0";
+    image.style.bottom = "0";
+    image.style.width = "100%";
+    image.style.height = "100%";
+    image.style.objectFit = "cover";
+    image.tabIndex = index === 0 ? 0 : -1;
+
+    if (index !== 0) {
+      image.setAttribute("aria-hidden", "true");
+    }
+
+    existingVideo.replaceWith(image);
+  });
+}
+
 export default function TeamUsaInteractions() {
   const [activeSection, setActiveSection] = useState<string>(SECTION_DEFS[0].id);
   const [navTheme, setNavTheme] = useState<Theme>("light");
@@ -386,6 +423,8 @@ export default function TeamUsaInteractions() {
       root.querySelectorAll<HTMLElement>(".section-athletes .athlete-quote-wrapper")
     );
 
+    swapAthleteCardMedia(athleteCards);
+
     const toolSection = root.querySelector<HTMLElement>(".section-tool");
     const toolSteps = Array.from(root.querySelectorAll<HTMLElement>(".section-tool__step"));
     const toolVideos = Array.from(
@@ -452,18 +491,30 @@ export default function TeamUsaInteractions() {
         card.style.transform = `translateX(${transform.translateX}) translateY(${transform.translateY}) rotate(${transform.rotate}) scale(${transform.scale})`;
 
         const cardVideo = card.querySelector<HTMLVideoElement>("video");
-        if (!cardVideo) {
+        if (cardVideo) {
+          if (isActive) {
+            cardVideo.tabIndex = 0;
+            cardVideo.removeAttribute("aria-hidden");
+            void cardVideo.play().catch(() => {});
+          } else {
+            cardVideo.tabIndex = -1;
+            cardVideo.setAttribute("aria-hidden", "true");
+            cardVideo.pause();
+          }
+          return;
+        }
+
+        const cardImage = card.querySelector<HTMLImageElement>("img");
+        if (!cardImage) {
           return;
         }
 
         if (isActive) {
-          cardVideo.tabIndex = 0;
-          cardVideo.removeAttribute("aria-hidden");
-          void cardVideo.play().catch(() => {});
+          cardImage.tabIndex = 0;
+          cardImage.removeAttribute("aria-hidden");
         } else {
-          cardVideo.tabIndex = -1;
-          cardVideo.setAttribute("aria-hidden", "true");
-          cardVideo.pause();
+          cardImage.tabIndex = -1;
+          cardImage.setAttribute("aria-hidden", "true");
         }
       });
 
