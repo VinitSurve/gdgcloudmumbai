@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import Image from "next/image";
+import Link from "next/link";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -24,7 +26,25 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="h-full antialiased">
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        <Link
+          href="/"
+          aria-label="Home"
+          className="fixed left-3 top-3 z-50 flex items-center gap-2 rounded-md bg-background/70 p-2 shadow-sm backdrop-blur supports-[backdrop-filter]:bg-background/50"
+        >
+          <Image
+            src="/assets/logos/GDG%20Logo.gif"
+            alt="GDG Cloud Mumbai"
+            width={120}
+            height={120}
+            unoptimized
+            priority
+            className=""
+          />
+          <span className="">GDG Cloud मुंबई</span>
+        </Link>
+        {children}
+      </body>
     </html>
   );
 }

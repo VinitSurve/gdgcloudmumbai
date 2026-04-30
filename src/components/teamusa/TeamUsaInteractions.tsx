@@ -457,6 +457,63 @@ export default function TeamUsaInteractions() {
 
     const buildSection = root.querySelector<HTMLElement>(".section-build");
     const buildTrack = root.querySelector<HTMLElement>(".section-build__track");
+    const buildCards = buildSection?.querySelector<HTMLElement>(".section-build__cards") ?? null;
+
+    let buildSnapKey = "";
+    let buildSnapShifts: number[] = [];
+
+    const recomputeBuildSnaps = (isMobile: boolean) => {
+      if (!buildTrack) {
+        return;
+      }
+
+      const cards = Array.from(buildTrack.querySelectorAll<HTMLElement>(".card-built"));
+      if (!cards.length) {
+        buildSnapShifts = [];
+        buildSnapKey = "";
+        return;
+      }
+
+      const maxShift = Math.max(0, buildTrack.scrollWidth - buildTrack.clientWidth);
+      const firstCard = cards[0];
+      const key = [
+        cards.length,
+        buildTrack.clientWidth,
+        maxShift,
+        firstCard?.offsetWidth ?? 0,
+        isMobile ? 1 : 0,
+      ].join("|");
+
+      if (key === buildSnapKey && buildSnapShifts.length) {
+        return;
+      }
+
+      buildSnapKey = key;
+
+      const viewportWidth = buildTrack.clientWidth || 1;
+      const nextShifts = cards.map((card) => {
+        const centerOffset = Math.max(0, (viewportWidth - card.offsetWidth) / 2);
+        return clamp(card.offsetLeft - centerOffset, 0, maxShift);
+      });
+
+      const uniqueShifts: number[] = [];
+      nextShifts.forEach((shift) => {
+        const last = uniqueShifts[uniqueShifts.length - 1];
+        if (last === undefined || Math.abs(shift - last) > 1) {
+          uniqueShifts.push(shift);
+        }
+      });
+
+      buildSnapShifts = uniqueShifts;
+
+      if (buildCards && buildSnapShifts.length > 1) {
+        const viewportHeight = window.innerHeight || 1;
+        const pixelsPerCard = viewportHeight * (isMobile ? 0.9 : 0.85);
+        buildCards.style.height = `${Math.ceil(
+          viewportHeight + pixelsPerCard * (buildSnapShifts.length - 1)
+        )}px`;
+      }
+    };
 
     const visualizingSection = root.querySelector<HTMLElement>(".section-visualizing");
     const visualizingRepeater = root.querySelector<HTMLElement>(".section-visualizing__repeater");
@@ -990,21 +1047,29 @@ export default function TeamUsaInteractions() {
           }
         }
 
-        if (buildSection && buildTrack) {
-          const rect = buildSection.getBoundingClientRect();
-          const viewportHeight = window.innerHeight || 1;
-          const maxShift = Math.max(0, buildTrack.scrollWidth - buildTrack.clientWidth);
-          let progress = 0;
+      if (buildSection && buildTrack) {
+        recomputeBuildSnaps(isMobile);
+        const rect = buildSection.getBoundingClientRect();
+        const viewportHeight = window.innerHeight || 1;
+        const maxShift = Math.max(0, buildTrack.scrollWidth - buildTrack.clientWidth);
+        let progress = 0;
 
-          if (rect.top <= 0 && rect.bottom > viewportHeight) {
-            const range = rect.height - viewportHeight;
-            progress = range > 0 ? Math.min(Math.abs(rect.top) / range, 1) : 0;
-          } else if (rect.top <= 0 && rect.bottom <= viewportHeight) {
-            progress = 1;
-          }
-
-          buildTrack.style.transform = `translateX(${(-maxShift * progress).toFixed(2)}px)`;
+        if (rect.top <= 0 && rect.bottom > viewportHeight) {
+          const range = rect.height - viewportHeight;
+          progress = range > 0 ? Math.min(Math.abs(rect.top) / range, 1) : 0;
+        } else if (rect.top <= 0 && rect.bottom <= viewportHeight) {
+          progress = 1;
         }
+
+        if (buildSnapShifts.length > 1) {
+          const scaled = progress * (buildSnapShifts.length - 1);
+          const snapIndex = Math.max(0, Math.min(buildSnapShifts.length - 1, Math.round(scaled)));
+          const targetShift = clamp(buildSnapShifts[snapIndex] ?? 0, 0, maxShift);
+          buildTrack.style.transform = `translate3d(${-targetShift.toFixed(2)}px, 0, 0)`;
+        } else {
+          buildTrack.style.transform = `translate3d(${(-maxShift * progress).toFixed(2)}px, 0, 0)`;
+        }
+      }
 
         if (visualizingRepeater && visualizingItems.length) {
           const progress = getStickySequenceProgress(visualizingRepeater);
