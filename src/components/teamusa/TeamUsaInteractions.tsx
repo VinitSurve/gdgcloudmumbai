@@ -181,6 +181,15 @@ function rangeProgress(value: number, start: number, end: number): number {
   return clamp((value - start) / (end - start), 0, 1);
 }
 
+function lerp(start: number, end: number, amount: number): number {
+  return start + (end - start) * amount;
+}
+
+function smoothStep(value: number): number {
+  const t = clamp(value, 0, 1);
+  return t * t * (3 - 2 * t);
+}
+
 function getSectionProgress(section: HTMLElement): number {
   const rect = section.getBoundingClientRect();
   const viewportHeight = window.innerHeight || 1;
@@ -508,7 +517,7 @@ export default function TeamUsaInteractions() {
 
       if (buildCards && buildSnapShifts.length > 1) {
         const viewportHeight = window.innerHeight || 1;
-        const pixelsPerCard = viewportHeight * (isMobile ? 0.9 : 0.85);
+        const pixelsPerCard = viewportHeight * (isMobile ? 0.72 : 0.62);
         buildCards.style.height = `${Math.ceil(
           viewportHeight + pixelsPerCard * (buildSnapShifts.length - 1)
         )}px`;
@@ -1062,9 +1071,15 @@ export default function TeamUsaInteractions() {
         }
 
         if (buildSnapShifts.length > 1) {
-          const scaled = progress * (buildSnapShifts.length - 1);
-          const snapIndex = Math.max(0, Math.min(buildSnapShifts.length - 1, Math.round(scaled)));
-          const targetShift = clamp(buildSnapShifts[snapIndex] ?? 0, 0, maxShift);
+          const scaled = smoothStep(progress) * (buildSnapShifts.length - 1);
+          const snapIndex = Math.max(0, Math.min(buildSnapShifts.length - 1, Math.floor(scaled)));
+          const nextIndex = Math.min(buildSnapShifts.length - 1, snapIndex + 1);
+          const snapProgress = smoothStep(scaled - snapIndex);
+          const targetShift = clamp(
+            lerp(buildSnapShifts[snapIndex] ?? 0, buildSnapShifts[nextIndex] ?? 0, snapProgress),
+            0,
+            maxShift
+          );
           buildTrack.style.transform = `translate3d(${-targetShift.toFixed(2)}px, 0, 0)`;
         } else {
           buildTrack.style.transform = `translate3d(${(-maxShift * progress).toFixed(2)}px, 0, 0)`;

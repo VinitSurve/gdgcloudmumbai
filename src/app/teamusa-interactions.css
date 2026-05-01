@@ -44,9 +44,8 @@
   transition: opacity 0.3s cubic-bezier(0.4, 1, 0.7, 1);
 }
 
-.teamusa-clone--interactive .section-build__track,
-.teamusa-clone--interactive .section-build .card-built {
-  transition: transform 0.6s cubic-bezier(0.4, 1, 0.7, 1);
+.teamusa-clone--interactive .section-build__track {
+  transition: none;
 }
 
 .teamusa-clone--interactive .section-edge__slider__viewport {

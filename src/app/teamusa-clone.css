@@ -2139,7 +2139,7 @@ html[data-motion=paused] .spin {
 .section-build__track {
 	flex-shrink: 0;
 	display: flex;
-	gap: clamp(2rem, 2.5vw, 2rem);
+	gap: clamp(1.25rem, 1.75vw, 1.5rem);
 	max-width: none;
 	transition: transform .6s cubic-bezier(.4, 1, .7, 1);
 	will-change: transform
@@ -2177,7 +2177,7 @@ html[data-motion=paused] .spin {
 	max-width: 100%;
 	width: auto;
 	max-height: calc(100dvh - clamp(10.875rem, 13.59375vw, 10.875rem));
-	height: clamp(38.125rem, 47.65625vw, 38.125rem);
+	height: clamp(36rem, 45vw, 38.125rem);
 	aspect-ratio: 430/610;
 	background: linear-gradient(180deg, #0d0f14 0%, #0a0c11 100%);
 	border: 1px solid rgba(255,255,255,0.06);
@@ -2275,9 +2275,17 @@ html[data-motion=paused] .spin {
 .card-built__inner {
 	display: flex;
 	flex-direction: column;
-	gap: clamp(1rem, 1.25vw, 1rem);
+	gap: clamp(.75rem, 1vw, 1rem);
 	font-weight: 480;
 	color: var(--color-gray-blue)
+}
+
+.card-built__eyebrow {
+	font-size: .82rem;
+	line-height: 1.35;
+	letter-spacing: .02em;
+	text-transform: uppercase;
+	color: rgba(180, 190, 210, 0.72)
 }
 
 .card-built__inner,
@@ -2295,7 +2303,8 @@ html[data-motion=paused] .spin {
 
 /* Role text */
 .role {
-	font-size: 0.9rem;
+	font-size: 0.92rem;
+	line-height: 1.5;
 	color: rgba(180, 190, 210, 0.7);
 }
 
@@ -2303,13 +2312,14 @@ html[data-motion=paused] .spin {
 
 .socials {
 	display: flex;
-	gap: 10px;
-	margin-top: 10px;
+	flex-wrap: wrap;
+	gap: 0.6rem;
+	margin-top: 0.75rem;
 }
 
 .socials a {
-	font-size: 0.7rem;
-	padding: 5px 10px;
+	font-size: 0.72rem;
+	padding: 0.4rem 0.7rem;
 	border-radius: 999px;
 	background: rgba(255,255,255,0.05);
 	border: 1px solid rgba(255,255,255,0.05);

@@ -475,101 +475,70 @@
 document.addEventListener("DOMContentLoaded", function () {
 
   const team = [
-  {
-    name: "Vinit Surve",
-    role: "Frontend Engineer",
-    image: "/assets/team/Vinit Surve.jpg",
-    socials: { linkedin: "#", github: "#", twitter: "#" }
-  },
-  {
-    name: "Aarav Mehta",
-    role: "Backend Engineer",
-    image: "/assets/team/member2.jpg",
-    socials: { linkedin: "#", github: "#", twitter: "#" }
-  },
-  {
-    name: "Neha Yadav",
-    role: "UI/UX Designer",
-    image: "/assets/team/member3.jpg",
-    socials: { linkedin: "#", github: "#", twitter: "#" }
-  },
-  {
-    name: "Rahul Shah",
-    role: "DevOps Engineer",
-    image: "/assets/team/member4.jpg",
-    socials: { linkedin: "#", github: "#", twitter: "#" }
-  },
-  {
-    name: "Sneha Patil",
-    role: "Full Stack Dev",
-    image: "/assets/team/member5.jpg",
-    socials: { linkedin: "#", github: "#", twitter: "#" }
-  },
-  {
-    name: "Aditya Jain",
-    role: "AI Engineer",
-    image: "/assets/team/member6.jpg",
-    socials: { linkedin: "#", github: "#", twitter: "#" }
-  },
-  {
-    name: "Kunal Verma",
-    role: "Cloud Engineer",
-    image: "/assets/team/member7.jpg",
-    socials: { linkedin: "#", github: "#", twitter: "#" }
-  },
-  {
-    name: "Riya Singh",
-    role: "Frontend Dev",
-    image: "/assets/team/member8.jpg",
-    socials: { linkedin: "#", github: "#", twitter: "#" }
-  },
-  {
-    name: "Manish Gupta",
-    role: "Backend Dev",
-    image: "/assets/team/member9.jpg",
-    socials: { linkedin: "#", github: "#", twitter: "#" }
-  },
-  {
-    name: "Priya Sharma",
-    role: "Product Manager",
-    image: "/assets/team/member10.jpg",
-    socials: { linkedin: "#", github: "#", twitter: "#" }
-  },
-  {
-    name: "Rohit Das",
-    role: "QA Engineer",
-    image: "/assets/team/member11.jpg",
-    socials: { linkedin: "#", github: "#", twitter: "#" }
-  },
-  {
-    name: "Anjali Verma",
-    role: "UI Developer",
-    image: "/assets/team/member12.jpg",
-    socials: { linkedin: "#", github: "#", twitter: "#" }
-  },
-  {
-    name: "Saurabh Kumar",
-    role: "Systems Engineer",
-    image: "/assets/team/member13.jpg",
-    socials: { linkedin: "#", github: "#", twitter: "#" }
-  },
-  {
-    name: "Pooja Nair",
-    role: "Data Analyst",
-    image: "/assets/team/member14.jpg",
-    socials: { linkedin: "#", github: "#", twitter: "#" }
-  },
-  {
-    name: "Akash Patel",
-    role: "Security Engineer",
-    image: "/assets/team/member15.jpg",
-    socials: { linkedin: "#", github: "#", twitter: "#" }
-  }
-];
-
-document.querySelectorAll('.card-built').forEach((el, i) => {
-  el.style.transitionDelay = `${i * 0.05}s`;
-});
+    {
+      name: "Vinit Surve",
+      title: "Full Stack Developer",
+      affiliation: "GDG OC Organizer • GDG Cloud Mumbai Member",
+      image: "https://cdn.jsdelivr.net/gh/randomaiphoto/build-and-grow-media@main/Vinit%20Surve.webp",
+      github: "https://github.com/VinitSurve",
+      linkedin: "https://www.linkedin.com/in/surve-vinit/",
+      email: "survevinit56@gmail.com",
+    },
+    {
+      name: "Abdullah Shaikh",
+      title: "Developer & Product Designer",
+      affiliation: "GDG Cloud Mumbai Member",
+      image: "https://cdn.jsdelivr.net/gh/randomaiphoto/build-and-grow-media@main/abdullah.webp",
+      github: "https://github.com/elite24shaikh",
+      linkedin: "https://www.linkedin.com/in/abdullahs24",
+      email: "hello.abdullabdev@gmail.com",
+    },
+    {
+      name: "Yash Agrawal",
+      title: "Developer & Data Scientist",
+      affiliation: "GDG Cloud Mumbai Member",
+      image: "https://cdn.jsdelivr.net/gh/randomaiphoto/build-and-grow-media@main/yash-agrawal.webp",
+      github: "https://github.com/agrawal-yash",
+      linkedin: "https://www.linkedin.com/in/yash-agrawal04",
+      email: "agrawal.yash.g@gmail.com",
+    },
+    {
+      name: "Durgesh Keshri",
+      title: "GDG Cloud Mumbai Member",
+      affiliation: "",
+      image: "https://cdn.jsdelivr.net/gh/randomaiphoto/build-and-grow-media@main/Durgesh%20Keshri.webp",
+      github: "https://github.com/Durgeshkeshri",
+      linkedin: "https://www.linkedin.com/in/durgesh-keshri-89712b201/",
+      email: "durgeshkeshri7@gmail.com",
+    },
+    {
+      name: "Nupur Bhoir",
+      title: "UI UX & Graphics Designer",
+      affiliation: "GDG Cloud Mumbai Member",
+      image: "https://cdn.jsdelivr.net/gh/randomaiphoto/build-and-grow-media@main/Nupur%20Bhoir.webp",
+      github: "https://github.com/Nupurbhoir",
+      linkedin: "https://www.linkedin.com/in/nupur-bhoir-ab1499329/",
+      email: "nupurbhoir21@gmail.com",
+    },
+    {
+      name: "Siddharth Reddy",
+      title: "Full Stack Dev & Editor",
+      affiliation: "GDG Cloud Mumbai Member",
+      image: "https://cdn.jsdelivr.net/gh/randomaiphoto/build-and-grow-media@main/Siddharth%20Reddy.webp",
+      github: "https://github.com/SidReddy-24",
+      linkedin: "https://www.linkedin.com/in/the-siddharth-reddy",
+      email: "sidreddy.onwork@gmail.com",
+    },
+    {
+      name: "Darp Lalani",
+      title: "Full Stack Dev",
+      affiliation: "GDG Cloud Pune Member",
+      image: "https://cdn.jsdelivr.net/gh/randomaiphoto/build-and-grow-media@main/Lalani%20Darp.webp",
+      github: "https://github.com/darplalani08",
+      linkedin: "https://www.linkedin.com/in/darplalani0",
+      email: "lalanidarp08@gmail.com",
+    },
+  ];
 
   const container = document.getElementById("team-cards");
 
@@ -578,12 +547,10 @@ document.querySelectorAll('.card-built').forEach((el, i) => {
     return;
   }
 
-  team.forEach((member) => {
-    const card = document.createElement("a");
-
+  team.forEach((member, index) => {
+    const card = document.createElement("article");
     card.className = "card-built";
-    card.href = "#";
-    card.style.transform = "translateY(40px)";
+    const emailHref = member.email.startsWith("mailto:") ? member.email : `mailto:${member.email}`;
 
     card.innerHTML = `
       <div class="card-built__icon">
@@ -591,18 +558,19 @@ document.querySelectorAll('.card-built').forEach((el, i) => {
       </div>
 
       <div class="card-built__inner">
+        ${member.affiliation ? `<p class="card-built__eyebrow">${member.affiliation}</p>` : ""}
         <h3 class="card-built__inner__title">${member.name}</h3>
-        <p>${member.role}</p>
+        <p class="role">${member.title}</p>
 
         <div class="socials">
-          <a href="${member.socials.linkedin}">in</a>
-          <a href="${member.socials.github}">gh</a>
-          <a href="${member.socials.twitter}">tw</a>
+          <a href="${member.github}" target="_blank" rel="noreferrer">GitHub</a>
+          <a href="${member.linkedin}" target="_blank" rel="noreferrer">LinkedIn</a>
+          <a href="${emailHref}">Email</a>
         </div>
       </div>
 
       <div class="card-built__footer">
-        <span>Team</span>
+        <span>${member.name.split(" ")[0]}</span>
       </div>
     `;
 
