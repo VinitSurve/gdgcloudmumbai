@@ -131,3 +131,16 @@
     @apply font-sans;
   }
 }
+
+/* CSMT Scroll Scene Section */
+#csmt-section {
+  position: relative;
+  height: 200vh;
+  width: 100%;
+  overflow: visible;
+}
+
+#csmt-section-root {
+  width: 100%;
+  height: 100%;
+}
