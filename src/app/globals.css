@@ -4,6 +4,15 @@
 @import "./teamusa-clone.css";
 @import "./teamusa-interactions.css";
 
+/* Ensure fullscreen canvas works correctly */
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+}
+
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {

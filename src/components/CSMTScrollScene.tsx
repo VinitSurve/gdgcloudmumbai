@@ -84,23 +84,23 @@ export default function CSMTScrollScene() {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
+    // Enable high-quality rendering
+    ctx.imageSmoothingEnabled = true;
+    ctx.imageSmoothingQuality = 'high';
+
     contextRef.current = ctx;
 
-    // Initialize canvas size to match viewport with DPR support
+    // Initialize canvas to fill viewport (fullscreen)
     const initializeCanvas = () => {
       const dpr = window.devicePixelRatio || 1;
-      const { width, height } = canvas.parentElement?.getBoundingClientRect() || {
-        width: window.innerWidth,
-        height: window.innerHeight,
-      };
 
-      // Set CSS size
-      canvas.style.width = `${width}px`;
-      canvas.style.height = `${height}px`;
+      // Force canvas to fill entire viewport
+      canvas.width = window.innerWidth * dpr;
+      canvas.height = window.innerHeight * dpr;
 
-      // Set actual buffer size for sharp rendering
-      canvas.width = width * dpr;
-      canvas.height = height * dpr;
+      // Set CSS size to viewport
+      canvas.style.width = `${window.innerWidth}px`;
+      canvas.style.height = `${window.innerHeight}px`;
 
       // Scale context to account for DPR
       ctx.scale(dpr, dpr);
@@ -128,16 +128,15 @@ export default function CSMTScrollScene() {
       const frame = imagesRef.current[currentFrameRef.current];
       if (frame?.loaded && ctx) {
         const img = frame.img;
-        const { width, height } = canvas;
         const dpr = window.devicePixelRatio || 1;
-        const canvasW = width / dpr;
-        const canvasH = height / dpr;
+        const canvasW = window.innerWidth;
+        const canvasH = window.innerHeight;
 
         // Clear canvas
         ctx.clearRect(0, 0, canvasW, canvasH);
 
-        // CONTAIN scaling: fit image within canvas while maintaining aspect ratio
-        const scale = Math.min(canvasW / img.width, canvasH / img.height);
+        // COVER scaling: fill viewport, crop image as needed (cinematic full-bleed)
+        const scale = Math.max(canvasW / img.width, canvasH / img.height);
         const drawWidth = img.width * scale;
         const drawHeight = img.height * scale;
 
@@ -145,7 +144,7 @@ export default function CSMTScrollScene() {
         const dx = (canvasW - drawWidth) / 2;
         const dy = (canvasH - drawHeight) / 2;
 
-        // Draw image
+        // Draw image with cinematic crop
         ctx.drawImage(img, dx, dy, drawWidth, drawHeight);
 
         // Update rendered frame reference
@@ -170,10 +169,10 @@ export default function CSMTScrollScene() {
   });
 
   return (
-    <div ref={wrapperRef} className="relative w-full h-full">
+    <div ref={wrapperRef} className="relative w-screen h-screen">
       {!isLoaded ? (
         // Loading state
-        <div className="flex items-center justify-center w-full h-full bg-black">
+        <div className="flex items-center justify-center w-screen h-screen bg-black">
           <div className="text-center">
             <div className="w-12 h-12 border-4 border-white border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
             <p className="text-white text-sm font-medium">
@@ -183,11 +182,11 @@ export default function CSMTScrollScene() {
         </div>
       ) : (
         <>
-          {/* Canvas: Image sequence renderer */}
+          {/* Canvas: Image sequence renderer - fullscreen with COVER scaling */}
           <canvas
             ref={canvasRef}
-            className="w-full h-full block bg-black"
-            style={{ display: 'block' }}
+            className="absolute top-0 left-0 w-screen h-screen block bg-black"
+            style={{ display: 'block', zIndex: 0 }}
           />
 
           {/* Grain overlay - subtle film grain for cinematic feel */}

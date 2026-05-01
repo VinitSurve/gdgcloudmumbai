@@ -26,8 +26,8 @@ export default function Home() {
       <div className="teamusa-clone" suppressHydrationWarning>
         <div dangerouslySetInnerHTML={{ __html: beforeMain }} suppressHydrationWarning />
 
-        <section className="relative h-[400vh]">
-          <div className="sticky top-0 h-screen w-full overflow-hidden">
+        <section className="relative w-screen h-[400vh]">
+          <div className="sticky top-0 w-screen h-screen overflow-hidden">
             <CSMTScrollScene />
           </div>
         </section>
